@@ -9,7 +9,12 @@ Vagrant.configure(2) do |config|
             s.ssh.forward_agent = true
             s.vm.box = "ubuntu/xenial64"
             s.vm.hostname = "vm#{i}"
-            s.vm.provision :shell, inline: "/vagrant/bootstrap.sh \"10.1.1.16#{i}\" " 
+            s.vm.provision :shell, path: "scripts/bootstrap_ansible.sh"
+            if i == 1
+                s.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/master.yml -c local"
+            else
+                s.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/worker.yml -c local"
+            end
             s.vm.network "private_network", ip: "10.1.1.16#{i}", 
                 netmask: "255.255.255.0", auto_config: true, virtualbox__intnet: "vm-net"
 

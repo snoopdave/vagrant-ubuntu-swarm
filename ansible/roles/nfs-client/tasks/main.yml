@@ -1,0 +1,26 @@
+---
+- name: Ensure NFS mount point
+  become: yes
+  file:
+    path: /var/nfs
+    state: directory
+    mode: 0755
+
+- name: Ensure NFS
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - nfs-common
+  tags:
+    - nfs
+
+- name: Mount NFS drive
+  mount:
+    path: /var/nfs
+    src: 10.1.1.161:/var/nfs
+    state: mounted
+    fstype: nfs
+
+

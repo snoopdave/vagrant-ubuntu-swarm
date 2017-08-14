@@ -1,0 +1,4 @@
+---
+- name: Join Swarm Cluster
+  become: yes
+  shell: docker swarm join --token `cat /var/nfs/swarm-token` 10.1.1.161:2377

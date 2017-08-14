@@ -1,0 +1,32 @@
+---
+- name: Ensure NFS exports file
+  become: yes
+  copy:
+    src: files/{{ item }}
+    dest: /etc/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "exports"
+
+- name: Ensure NFS directory
+  become: yes
+  file:
+    path: /var/nfs
+    state: directory
+    mode: 0755
+
+- name: Ensure NFS
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - nfs-kernel-server
+  tags:
+    - nfs
+
+- name: Ensure NFS table
+  become: yes
+  command: "exportfs -a"

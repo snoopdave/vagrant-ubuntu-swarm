@@ -1,0 +1,12 @@
+---
+- name: Ensure Docker Swarm initialization
+  become: yes
+  command: "docker swarm init --advertise-addr 10.1.1.161"
+  tags:
+    - docker
+
+- name: Ensure token is available on NFS
+  become: yes
+  shell: docker swarm join-token -q worker > /var/nfs/swarm-token
+  tags:
+    - docker
