@@ -48,6 +48,8 @@ can login to vm1 and list the Docker networks:
     2db972t4ugnd        ingress             overlay             swarm
     4838d2ef79d3        none                null                local
 
+### Via port 80
+
 You can also access the cluster via IP addresses:
 
 * vm1 is 10.1.1.161
@@ -60,9 +62,11 @@ Tomcat at http://10.1.1.161:8080 on your host computer.
 
 You can change or add additional port mappings by changing the `Vagrantfile`.
 
-## NFS drive
+### NFS drive
 
-vm1 also runs an NFS server and the other VMs mount it as /var/nfs.
+vm1 runs an NFS server and shares `/var/nfs` with the other instances,
+which mount the drive at the same path.
+
 
 
 
