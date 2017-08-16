@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 docker service create \
     --name mysql \
     --network roller \
