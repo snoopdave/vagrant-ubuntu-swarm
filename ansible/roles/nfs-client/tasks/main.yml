@@ -22,5 +22,6 @@
     src: 10.1.1.161:/var/nfs
     state: mounted
     fstype: nfs
+    opts: rw
 
 

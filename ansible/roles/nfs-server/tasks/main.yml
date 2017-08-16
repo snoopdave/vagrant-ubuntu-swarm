@@ -16,6 +16,8 @@
     path: /var/nfs
     state: directory
     mode: 0755
+    owner: nobody
+    group: nogroup
 
 - name: Ensure NFS
   become: yes
