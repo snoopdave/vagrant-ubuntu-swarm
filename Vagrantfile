@@ -15,7 +15,8 @@ Vagrant.configure(2) do |config|
             else
                 s.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/worker.yml -c local"
             end
-            s.vm.network "private_network", ip: "10.1.1.16#{i}", 
+            s.vm.network "forwarded_port", guest: 8080, host: 80
+            s.vm.network "private_network", ip: "10.1.1.16#{i}",
                 netmask: "255.255.255.0", auto_config: true, virtualbox__intnet: "vm-net"
 
             s.vm.provider "virtualbox" do |v|
