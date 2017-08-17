@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
     (1..3).each do |i|
 
         config.vm.define "vm#{i}" do |s|
-            s.ssh.forward_agent = true
+            #s.ssh.forward_agent = true
             s.vm.box = "ubuntu/xenial64"
             s.vm.hostname = "vm#{i}"
             s.vm.provision :shell, path: "scripts/bootstrap_ansible.sh"
@@ -15,10 +15,7 @@ Vagrant.configure(2) do |config|
             else
                 s.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/worker.yml -c local"
             end
-            s.vm.network "forwarded_port", guest: 8080, host: 80
-            s.vm.network "private_network", ip: "10.1.1.16#{i}",
-                netmask: "255.255.255.0", auto_config: true, virtualbox__intnet: "vm-net"
-
+            s.vm.network "private_network", ip: "10.1.1.16#{i}", netmask: "255.255.255.0", auto_config: true
             s.vm.provider "virtualbox" do |v|
                 v.name = "vm#{i}"
                 v.memory = 2048

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+docker network create -d overlay roller
+sudo mkdir /var/nfs/mysql
+
 docker service create \
     --name mysql \
     --network roller \

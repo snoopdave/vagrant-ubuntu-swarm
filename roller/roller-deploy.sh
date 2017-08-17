@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# NB: database named rollerdb must exist before you deploy roller
+
+sudo mkdir /var/nfs/roller
+
 docker service create \
     --name roller \
     --network roller \
