@@ -1,8 +1,8 @@
 # vagrant-ubuntu-swarm
 
-Vagrant setup for 3-node Docker Swarm cluster on Ubuntu.
+Vagrant setup for 2-node Docker Swarm cluster on Ubuntu.
 
-This Vagrant setup creates three Ubuntu VMs and then uses Ansible
+This Vagrant setup creates two Ubuntu VMs and then uses Ansible
 to install an NFS server and Docker Swarm manager on VM #1. It sets
 up NFS clients on the other VMs, Docker and uses "docker swarm join"
 to add the other VMs the the Docker Swarm managed by VM #1.
@@ -29,14 +29,14 @@ Use Vagrant to create the cluster:
 
     $ vagrant up
 
-Vagrant will create three VMs running Ubuntu and will then use Ansible
+Vagrant will create two VMs running Ubuntu and will then use Ansible
 to install Docker on each. Ansible will init a Docker Swarm cluster
 on vm1, making it the Swarm master, and save the join-token to NFS
 drive. The other VMs will use that join-token to join the cluster.
 
 ## Accessing the cluster
 
-You can use Vagrant to ssh into the three VMs of the cluster:
+You can use Vagrant to ssh into the two VMs of the cluster:
 vm1, vm2 and vm3. vm1 is the Docker Swarm master. For example, you
 can login to vm1 and list the Docker networks:
 
@@ -54,7 +54,6 @@ You can also access the cluster via IP addresses:
 
 * vm1 is 10.1.1.161
 * vm2 is 10.1.1.162
-* vm3 is 10.1.1.163
 
 The cluster also exposes 8080 on each VM as port 80. So, for example
 if you run Tomcat on vm1 on port 8080, you'll be able to access
