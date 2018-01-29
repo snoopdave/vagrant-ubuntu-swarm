@@ -24,4 +24,8 @@
     fstype: nfs
     opts: rw
 
-
+- name: Ensure RPC setup properly for NFS locks
+  command: "{{ item }}"
+  with_items:
+  - systemctl enable rpc-statd
+  - systemctl start rpc-statd
