@@ -18,12 +18,11 @@ Vagrant.configure(2) do |config|
             s.vm.network "private_network", ip: "10.1.1.16#{i}", netmask: "255.255.255.0", auto_config: true
             s.vm.provider "virtualbox" do |v|
                 v.name = "vm#{i}"
-                v.memory = 2048
+                v.memory = 4096
+                v.cpus= 2
                 v.gui = false
             end
         end
     end
 end
-
-
 
